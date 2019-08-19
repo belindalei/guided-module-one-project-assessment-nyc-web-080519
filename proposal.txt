@@ -1,0 +1,29 @@
+Goal: To provide job seekers with an interactive tool to review, maintain a list, and apply to open NYC government job opportunities filtered by several indicators, such as:
+
+- job category
+- full-time vs part-time,
+- qualifications/skills
+- minimum qualification requirements
+- salary range
+- schedule
+
+API: NYC Open Data (https://data.cityofnewyork.us/)
+
+restclient 
+
+Model #1: JobSeeker :has_many InterestedJobList, :has_many OpenJobs through: :InterestedJobList
+Model #2: InterestedJobList :belongs_to JobSeeker, :belongs_to OpenJob
+Model #3: OpenJob :has_many InterestedJobList, :has_many JobSeeker through: :InterestedJobList
+
+User Story #1: As a job seeker, I want to enter my information and preferences to create a profile
+
+User Story #2: As a job seeker, I want to retrieve a list of open jobs based on my preferences and view their descriptions and other relevant information.
+
+User Story #3: As a job seeker, I want to be able to save jobs that I am interested in for later review
+
+User Story #4: As a job seeker, I want to be able to remove jobs from the list that I am no longer intrested in.
+
+User Story #5: As a job seeker, I want to be able to be taken to the application page for a given job.
+
+User Story #6: As a job seeker, I want to be able to add my own notes to jobs that I am interested in.
+
