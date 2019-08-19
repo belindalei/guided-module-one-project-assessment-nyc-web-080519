@@ -1,4 +1,4 @@
 class OpenJob < ActiveRecord::Base
-    has_many :JobQueue
-    has_many :JobSeeker, through: :JobQueue
+    has_many :liked_jobs
+    has_many :job_seekers, through: :liked_jobs
 end

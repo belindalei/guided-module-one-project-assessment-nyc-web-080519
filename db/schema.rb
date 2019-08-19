@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_19_173252) do
-
-  create_table "job_queues", force: :cascade do |t|
-    t.integer "open_job_id"
-    t.integer "job_seeker_id"
-  end
+ActiveRecord::Schema.define(version: 2019_08_19_210352) do
 
   create_table "job_seekers", force: :cascade do |t|
     t.string "name"
     t.integer "desired_salary"
     t.integer "level"
+  end
+
+  create_table "liked_jobs", force: :cascade do |t|
+    t.integer "open_job_id"
+    t.integer "job_seeker_id"
   end
 
   create_table "open_jobs", force: :cascade do |t|
