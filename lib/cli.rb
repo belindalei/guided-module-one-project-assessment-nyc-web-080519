@@ -23,12 +23,13 @@ class CLI
     def main_menu(job_seeker)
         puts "\nPlease choose from an option from the list below:"
 
-        puts "\n1. Show me a list of job(s) that match my profile. (Salary)" #seeing the open_jobs
+        puts "\n1. Show me a list of jobs that match my profile. (Sorted by Salary)"
         puts "2. Show me the list of jobs on my 'liked' list."
-        puts "3. Delete a job from my 'liked' list." #deleting from liked_jobs
+        puts "3. Delete a job from my 'liked' list."
         puts "4. Add a note to a job from my 'liked' list.\n"
         puts "5. Exit."
         input = gets.chomp.to_i
+
         menu_router(input, job_seeker)
     end
 
@@ -36,10 +37,10 @@ class CLI
         if input.class != Integer || input < 1 || input > 4
             puts "\nSorry. That's not a valid menu selection. Try again!"
         elsif input == 1
-            job_seeker.salaryMatch
+            job_seeker.get_matches
             puts "Please choose a job you would like to add based on its six-digit job_id number (e.g., 378418)."
             job_id = gets.chomp.to_i 
-            job_seeker.likeJob(job_id)
+            job_seeker.like_job(job_id)
             job_seeker.display_liked_jobs
             puts "The above are your liked jobs."
         elsif input == 2 
@@ -49,7 +50,7 @@ class CLI
             job_seeker.display_liked_jobs
             puts "Which item would you like to delete?"
             delete_item = gets.chomp.to_i 
-            job_seeker.removeLikeJob(delete_item)
+            job_seeker.remove_liked_job(delete_item)
             puts "You have successfully removed #{delete_item}."
         elsif input == 4 
             puts "You have chosen to add a note to a job from your 'liked' list.\n"

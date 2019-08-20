@@ -29,10 +29,14 @@ User Story #5: As a job seeker, I want to be able to add my own notes to jobs th
 -[X] Make sure there aren't repeat user profiles 
 -[X] Make sure there aren't repeat job listings 
 -[X] Connect CLI info with additional User Stories 
--[] Sorting on salary and government level
--[] Match base on government level 
+-[X] Sorting on salary
+-[X] Match base on level 
 -[] Make CLI pretty!
+    -[] Reformat job list(s) as table (Dan)
+    -[] Clean up Input/Output in CLI (Belinda)
+    -[] Add ASCII ART!!! (Dan)
+-[] Seed the Database (Belinda)
 -[] Write the ReadMe 
--[] Clean up the display
+-[] Create Demo Video
 -[X] Limit to reasonable # of jobs in API calls
 
