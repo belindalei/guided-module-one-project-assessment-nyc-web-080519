@@ -2,6 +2,8 @@ class JobSeeker < ActiveRecord::Base
     has_many :liked_jobs
     has_many :open_jobs, through: :liked_jobs
 
+  #base_url = "https://data.cityofnewyork.us/resource/kpav-sd4t.json?"
+
     def self.createProfile(name)
         puts "What is your minimum salary requirement?"
         salary = gets.chomp
@@ -18,7 +20,7 @@ class JobSeeker < ActiveRecord::Base
         job_data = JSON.parse(RestClient.get("https://data.cityofnewyork.us/resource/kpav-sd4t.json?"))
         matches = job_data.select do |job|
             job["salary_range_from"].to_i >= self.desired_salary
-        end.uniq{|job| job["job_id"]}
+        end.uniq {|job| job["job_id"]}.take(15)
         matched_list = matches.each_with_index do |match, i|
            puts "#{i+1}. #{match['business_title']} located in #{match['work_location']} with job_id #{match['job_id']}"
         end
@@ -29,7 +31,7 @@ class JobSeeker < ActiveRecord::Base
     def likeJob(job_id)
         job_data = JSON.parse(RestClient.get("https://data.cityofnewyork.us/resource/kpav-sd4t.json?job_id=#{job_id}"))[0]
         new_job = OpenJob.create(title: job_data["business_title"], description: job_data["job_description"], level: job_data["level"], salary_range_from: job_data["salary_range_from"], salary_range_to: job_data["salary_range_to"])
-        LikedJob.where("open_job_id" => new_job.id, "job_seeker_id" => self.id).first_or_create
+        LikedJob.find_or_create_by("open_job_id" => new_job.id, "job_seeker_id" => self.id)
     end
 
 #User Story #4: As a job seeker, I want to be able to remove jobs from the list that I am no longer intrested in.
@@ -41,7 +43,6 @@ class JobSeeker < ActiveRecord::Base
 #User Story #5: As a job seeker, I want to be able to add my own notes to jobs that I am interested in.
     def display_liked_jobs  
         self.liked_jobs.each do |job|
-            binding.pry
             puts job.id 
         end
     end

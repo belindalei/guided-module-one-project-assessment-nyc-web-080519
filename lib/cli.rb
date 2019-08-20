@@ -9,7 +9,7 @@ class CLI
     end
 
     def login
-        puts "What is your name?"
+        puts "\nWhat is your name?"
         my_name = gets.chomp
         if JobSeeker.find_by name: my_name
           job_seeker = JobSeeker.find_by name: my_name
@@ -22,6 +22,7 @@ class CLI
 
     def main_menu(job_seeker)
         puts "\nPlease choose from an option from the list below:"
+
         puts "\n1. Show me a list of job(s) that match my profile. (Salary)" #seeing the open_jobs
         puts "2. Show me the list of jobs on my 'liked' list."
         puts "3. Delete a job from my 'liked' list." #deleting from liked_jobs
