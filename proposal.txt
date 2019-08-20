@@ -23,7 +23,5 @@ User Story #3: As a job seeker, I want to be able to save jobs that I am interes
 
 User Story #4: As a job seeker, I want to be able to remove jobs from the list that I am no longer intrested in.
 
-User Story #5: As a job seeker, I want to be able to be taken to the application page for a given job.
-
-User Story #6: As a job seeker, I want to be able to add my own notes to jobs that I am interested in.
+User Story #5: As a job seeker, I want to be able to add my own notes to jobs that I am interested in.
 

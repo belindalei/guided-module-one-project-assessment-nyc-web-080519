@@ -10,15 +10,16 @@ class CLI
     def main_menu
         puts "\nPlease choose from an option from the list below:"
         puts "\n1. Create a new profile."
-        puts "2. Show me a list of job that match my profile. (Salary)"
-        puts "3. Delete a job from my 'liked' list."
-        puts "4. Exit."
+        puts "2. Show me a list of job(s) that match my profile. (Salary)" #seeing the open_jobs
+        puts "3. Delete a job from my 'liked' list." #deleting from liked_jobs
+        puts "4. Add a note to a job from my 'liked' list."
+        puts "5. Exit."
         input = gets.chomp.to_i
         menu_router(input)
     end
 
     def menu_router(input)
-        if input.class != Integer || input < 1 || input > 4
+        if input.class != Integer || input < 1 || input > 5
             puts "\nSorry. That's not a valid menu selection. Try again!"
             main_menu
         elsif input == 1

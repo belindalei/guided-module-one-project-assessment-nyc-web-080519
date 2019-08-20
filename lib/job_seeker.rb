@@ -2,7 +2,7 @@ class JobSeeker < ActiveRecord::Base
     has_many :liked_jobs
     has_many :open_jobs, through: :liked_jobs
 
-    def self.createProfile
+    def self.createProfile #RETURN BACK TO CHECK .FIRST_OR_CREATE
         puts "What is your name?"
         user_name = gets.chomp
         puts "What is your minimum salary requirement?"
@@ -30,7 +30,7 @@ class JobSeeker < ActiveRecord::Base
     def likeJob(job_id)
         job_data = JSON.parse(RestClient.get("https://data.cityofnewyork.us/resource/kpav-sd4t.json?job_id=#{job_id}"))[0]
         new_job = OpenJob.create(title: job_data["business_title"], description: job_data["job_description"], level: job_data["level"], salary_range_from: job_data["salary_range_from"], salary_range_to: job_data["salary_range_to"])
-        LikedJob.create("open_job_id" => new_job.id, "job_seeker_id" => self.id)
+        LikedJob.where("open_job_id" => new_job.id, "job_seeker_id" => self.id).first_or_create
     end
 
 #User Story #4: As a job seeker, I want to be able to remove jobs from the list that I am no longer intrested in.
@@ -39,6 +39,18 @@ class JobSeeker < ActiveRecord::Base
         LikedJob.where(id: liked_job_id).destroy_all
     end
 
+#User Story #5: As a job seeker, I want to be able to add my own notes to jobs that I am interested in.
+    def display_liked_jobs
+        self.liked_jobs.each do |job|
+            puts job.id 
+        end
+    end
+    
+    def add_notes(liked_job_id, notes)
+        #associate notes with the appropriate liked job 
+        #push notes into the liked job notes column 
+        self.liked_jobs.where(liked_job_id == id).update(notes: notes)
+    end
 
 
 end
