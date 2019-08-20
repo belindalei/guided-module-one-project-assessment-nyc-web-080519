@@ -13,9 +13,9 @@ class CLI
         my_name = gets.chomp
         if JobSeeker.find_by name: my_name
           job_seeker = JobSeeker.find_by name: my_name
-            puts "Hello #{job_seeker.name}. Welcome back!"
+            puts "\nHello #{job_seeker.name}. Welcome back!"
         else
-            job_seeker = JobSeeker.createProfile(my_name)
+            job_seeker = JobSeeker.create_profile(my_name)
         end
         main_menu(job_seeker)
     end

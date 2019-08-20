@@ -36,7 +36,7 @@ User Story #5: As a job seeker, I want to be able to add my own notes to jobs th
     -[] Clean up Input/Output in CLI (Belinda)
     -[] Add ASCII ART!!! (Dan)
 -[] Seed the Database (Belinda)
--[] Write the ReadMe 
+-[] Write the ReadMe
 -[] Create Demo Video
 -[X] Limit to reasonable # of jobs in API calls
 
