@@ -9,7 +9,7 @@ class JobSeeker < ActiveRecord::Base
         salary = gets.chomp
         puts "What is your government job level?"
         level = gets.chomp
-        JobSeeker.create(name: user_name, desired_salary: salary, level: level)
+        JobSeeker.where(name: user_name, desired_salary: salary, level: level).first_or_create
     end
 
 #RETURN BACK TO MAKE SURE LIST OF MATCHES IS UNIQUE 
@@ -35,6 +35,9 @@ class JobSeeker < ActiveRecord::Base
 
 #User Story #4: As a job seeker, I want to be able to remove jobs from the list that I am no longer intrested in.
 
+    def removeLikeJob(liked_job_id)
+        LikedJob.where(id: liked_job_id).destroy_all
+    end
 
 
 
