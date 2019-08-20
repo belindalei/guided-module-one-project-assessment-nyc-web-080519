@@ -18,7 +18,7 @@ class JobSeeker < ActiveRecord::Base
         job_data = JSON.parse(RestClient.get("https://data.cityofnewyork.us/resource/kpav-sd4t.json?"))
         matches = job_data.select do |job|
             job["salary_range_from"].to_i >= self.desired_salary
-        end
+        end.uniq{|job| job["job_id"]}
         matched_list = matches.each_with_index do |match, i|
            puts "#{i+1}. #{match['business_title']} located in #{match['work_location']} with job_id #{match['job_id']}"
         end
@@ -39,15 +39,14 @@ class JobSeeker < ActiveRecord::Base
     end
 
 #User Story #5: As a job seeker, I want to be able to add my own notes to jobs that I am interested in.
-    def display_liked_jobs
+    def display_liked_jobs  
         self.liked_jobs.each do |job|
+            binding.pry
             puts job.id 
         end
     end
     
     def add_notes(liked_job_id, notes)
-        #associate notes with the appropriate liked job 
-        #push notes into the liked job notes column 
         self.liked_jobs.where(liked_job_id == id).update(notes: notes)
     end
 
