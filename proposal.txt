@@ -25,3 +25,12 @@ User Story #4: As a job seeker, I want to be able to remove jobs from the list t
 
 User Story #5: As a job seeker, I want to be able to add my own notes to jobs that I am interested in.
 
+##To Do Items 
+-[] Make sure there aren't repeat user profiles 
+-[] Make sure there aren't repeat job listings 
+-[] Connect CLI info with additional User Stories 
+-[] Sorting on salary and government level
+-[] Match base on government level 
+-[] Make CLI pretty!
+-[] Write the ReadMe 
+

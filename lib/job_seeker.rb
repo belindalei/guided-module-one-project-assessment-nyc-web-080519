@@ -2,14 +2,14 @@ class JobSeeker < ActiveRecord::Base
     has_many :liked_jobs
     has_many :open_jobs, through: :liked_jobs
 
-    def self.createProfile #RETURN BACK TO CHECK .FIRST_OR_CREATE
-        puts "What is your name?"
-        user_name = gets.chomp
+    def self.createProfile(name)
         puts "What is your minimum salary requirement?"
         salary = gets.chomp
         puts "What is your government job level?"
         level = gets.chomp
-        JobSeeker.where(name: user_name, desired_salary: salary, level: level).first_or_create
+        new_job_seeker = JobSeeker.create(name: name, desired_salary: salary, level: level)
+        puts "Hello, #{new_job_seeker.name}. You've just created a new profile"
+        return new_job_seeker 
     end
 
 #RETURN BACK TO MAKE SURE LIST OF MATCHES IS UNIQUE 
@@ -22,7 +22,6 @@ class JobSeeker < ActiveRecord::Base
         matched_list = matches.each_with_index do |match, i|
            puts "#{i+1}. #{match['business_title']} located in #{match['work_location']} with job_id #{match['job_id']}"
         end
-        matched_list.save 
     end
 
 #User Story #3: As a job seeker, I want to be able to save jobs that I am interested in for later review
