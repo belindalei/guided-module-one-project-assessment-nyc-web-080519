@@ -50,6 +50,12 @@ class JobSeeker < ActiveRecord::Base
     end
 
     def like_job(job_id)
+        # liked_job_id_arr = self.liked_jobs.map do |liked_job|
+        #     liked_job.id 
+        # end 
+        # if !liked_job_id_arr.include?(job_id)
+        #     puts "Invalid response. please input another response."
+        # end 
         job_data = JSON.parse(RestClient.get("#{@@base_url}job_id=#{job_id}"))[0]
         new_job = OpenJob.create(
             title: job_data["business_title"],
@@ -69,6 +75,7 @@ class JobSeeker < ActiveRecord::Base
     end
 
     def display_liked_jobs
+        puts "\nYou have #{self.liked_jobs.count} liked jobs in your list: \n\n"
         table = Text::Table.new
         table.head = ["Job ID", "Title", "Notes", "Salary Range From", "Salary Range To"] #"Level"
         self.liked_jobs.reload.each_with_index do |liked_job, i|
