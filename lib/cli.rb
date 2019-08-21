@@ -3,7 +3,7 @@ require 'pry'
 
 class CLI
     def run
-        ActiveRecord::Base.logger.level=1 
+        ActiveRecord::Base.logger.level=1
         puts "\nWelcome to Belinda and Dan's Job-Seeking App!"
         login 
     end

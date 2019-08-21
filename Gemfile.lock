@@ -53,6 +53,7 @@ GEM
       activerecord (>= 3.2)
       sinatra (>= 1.0)
     sqlite3 (1.4.1)
+    text-table (1.2.4)
     thin (1.7.2)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -78,6 +79,7 @@ DEPENDENCIES
   sinatra
   sinatra-activerecord
   sqlite3
+  text-table
   thin
 
 BUNDLED WITH
