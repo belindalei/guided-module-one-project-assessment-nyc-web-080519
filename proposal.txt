@@ -31,13 +31,15 @@ User Story #5: As a job seeker, I want to be able to add my own notes to jobs th
 -[X] Connect CLI info with additional User Stories 
 -[X] Sorting on salary
 -[X] Match base on level 
--[] Add ASCII ART!!! (Dan)
+-[X] Add ASCII ART!!! (Dan)
 -[X] Seed the Database (Belinda)
--[] Write the ReadMe
--[] Create Demo Video
 -[X] Limit to reasonable # of jobs in API calls
 -[X] Figure out why liked_jobs is still only returning one job rather than the whole list 
 -[X] The remove method runs into the issue where after destroy the LikedJob data the Open Job data still persists 
--[] add rescue errors 
+-[] add rescue errors (Belinda)
     - When Job ID is not 6 digits for option 1 or 3 digits for option 4 (remove)
--[] add sleeper thingy that Andrew had 
+-[] add sleeper thingy that Andrew had (Belinda)
+-[] Easter Egg (Dan)
+-[] Refactoring (Thurs)
+-[] Write the ReadMe (Dan)
+-[] Create Demo Video (Thurs)
