@@ -12,11 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2019_08_20_133117) do
 
-  create_table "job_queues", force: :cascade do |t|
-    t.integer "open_job_id"
-    t.integer "job_seeker_id"
-  end
-
   create_table "job_seekers", force: :cascade do |t|
     t.string "name"
     t.integer "desired_salary"

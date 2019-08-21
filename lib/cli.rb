@@ -9,7 +9,7 @@ class CLI
     end
 
     def login
-        puts "\nWhat is your name?"
+        puts "\nWhat is your name?\n"
         my_name = gets.chomp
         if JobSeeker.find_by name: my_name
           job_seeker = JobSeeker.find_by name: my_name
@@ -27,23 +27,25 @@ class CLI
         puts "2. Show me the list of jobs on my 'liked' list."
         puts "3. Delete a job from my 'liked' list."
         puts "4. Add a note to a job from my 'liked' list.\n"
-        puts "5. Exit."
+        puts "5. Exit.\n"
         input = gets.chomp.to_i
 
         menu_router(input, job_seeker)
     end
 
     def menu_router(input, job_seeker)
-        if input.class != Integer || input < 1 || input > 4
+        if input.class != Integer || input < 1 || input > 5
             puts "\nSorry. That's not a valid menu selection. Try again!"
         elsif input == 1
+            puts "\n*****************\n"
             job_seeker.get_matches
-            puts "Please choose a job you would like to add based on its six-digit job_id number (e.g., 378418)."
+            puts "*****************\nPlease choose a job you would like to add based on its six-digit job_id number (e.g., 378418).\n"
             job_id = gets.chomp.to_i 
             job_seeker.like_job(job_id)
             job_seeker.display_liked_jobs
             puts "The above are your liked jobs."
         elsif input == 2 
+            puts "\n***********************\n"
             job_seeker.display_liked_jobs
         elsif input == 3
             puts "You have chosen to delete items from your list"
@@ -53,7 +55,7 @@ class CLI
             job_seeker.remove_liked_job(delete_item)
             puts "You have successfully removed #{delete_item}."
         elsif input == 4 
-            puts "You have chosen to add a note to a job from your 'liked' list.\n"
+            puts "\nYou have chosen to add a note to a job from your 'liked' list.\n"
             job_seeker.display_liked_jobs
             puts "Please choose which job you would like to add a note to based on its number in the list. NOT JOB_ID."
             job_note_id = gets.chomp.to_i 
@@ -62,6 +64,9 @@ class CLI
             job_seeker.add_notes(job_note_id, note)
             job_seeker.display_liked_jobs 
             puts "Your #{job_note_id} has been updated with the following note: \n #{note}"
+        elsif input == 5 
+            puts "\nThanks for logging in. Have a nice day!"
+            exit 0 
         else
             puts "\nI don't support that option yet. Eek."
             

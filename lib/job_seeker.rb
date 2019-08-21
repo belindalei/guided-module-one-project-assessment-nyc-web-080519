@@ -5,11 +5,22 @@ class JobSeeker < ActiveRecord::Base
   @@base_url = "https://data.cityofnewyork.us/resource/kpav-sd4t.json?"
 
     def self.create_profile(name)
-        puts "What is your minimum salary requirement?"
-        salary = gets.chomp
-
-        puts "What is your government job level?"
-        level = gets.chomp
+        puts "What is your minimum annual salary requirement?"
+        begin
+            salary = gets.chomp
+            salary = Integer(salary)
+        rescue ArgumentError 
+            puts "Please enter an integer number:"
+            retry 
+        end 
+        puts "What is your government job/GS level? GS levels consist of 15 grades with 1 being the lowest and 15 being the highest."
+        level = gets.chomp.to_i
+        if !level.between?(1,15) 
+            puts "Please input a GS level between 1-15 with 1 being the entry level position and 15 being the most senior position."
+            level = gets.chomp.to_i
+        else 
+            level
+        end
 
         new_job_seeker = JobSeeker.create(name: name, desired_salary: salary, level: level)
 
@@ -30,10 +41,6 @@ class JobSeeker < ActiveRecord::Base
         end
     end
 
-    def level_match
-
-    end
-
     def like_job(job_id)
         job_data = JSON.parse(RestClient.get("#{@@base_url}job_id=#{job_id}"))[0]
         new_job = OpenJob.create(
@@ -51,8 +58,9 @@ class JobSeeker < ActiveRecord::Base
     end
 
     def display_liked_jobs  
-        self.liked_jobs.each do |job|
-            puts job.id 
+        display = self.liked_jobs.each do |job|
+            puts "#{job.id}. Title: #{open_jobs.find(job.open_job_id).title} Salary: $#{open_jobs.find(job.open_job_id).salary_range_from}"
+            job.notes
         end
     end
     
