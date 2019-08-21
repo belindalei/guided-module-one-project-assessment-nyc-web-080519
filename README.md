@@ -1,5 +1,5 @@
-Module One Final Project
-========================
+Funemployed: A Job-Seeking CLI App
+==================================
 
 Congratulations, you're at the end of module one! You've worked crazy hard to get here and have learned a ton.
 

@@ -6,15 +6,28 @@ class CLI
         ActiveRecord::Base.logger.level=1
         puts <<-LOGO
 
-        ███████╗██╗   ██╗███╗   ██╗███████╗███╗   ███╗██████╗ ██╗      ██████╗ ██╗   ██╗███████╗██████╗     ██╗██╗██╗██╗██╗██╗██╗██╗██╗
-        ██╔════╝██║   ██║████╗  ██║██╔════╝████╗ ████║██╔══██╗██║     ██╔═══██╗╚██╗ ██╔╝██╔════╝██╔══██╗    ██║██║██║██║██║██║██║██║██║
-        █████╗  ██║   ██║██╔██╗ ██║█████╗  ██╔████╔██║██████╔╝██║     ██║   ██║ ╚████╔╝ █████╗  ██║  ██║    ██║██║██║██║██║██║██║██║██║
-        ██╔══╝  ██║   ██║██║╚██╗██║██╔══╝  ██║╚██╔╝██║██╔═══╝ ██║     ██║   ██║  ╚██╔╝  ██╔══╝  ██║  ██║    ╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝
-        ██║     ╚██████╔╝██║ ╚████║███████╗██║ ╚═╝ ██║██║     ███████╗╚██████╔╝   ██║   ███████╗██████╔╝    ██╗██╗██╗██╗██╗██╗██╗██╗██╗
-        ╚═╝      ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝     ╚═╝╚═╝     ╚══════╝ ╚═════╝    ╚═╝   ╚══════╝╚═════╝     ╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝
-                                                                                                                                       
+        ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓
+         ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓
+          ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ 
+
+
+
+                ███████╗██╗   ██╗███╗   ██╗███████╗███╗   ███╗██████╗ ██╗      ██████╗ ██╗   ██╗███████╗██████╗     ██╗██╗██╗██╗
+                ██╔════╝██║   ██║████╗  ██║██╔════╝████╗ ████║██╔══██╗██║     ██╔═══██╗╚██╗ ██╔╝██╔════╝██╔══██╗    ██║██║██║██║
+                █████╗  ██║   ██║██╔██╗ ██║█████╗  ██╔████╔██║██████╔╝██║     ██║   ██║ ╚████╔╝ █████╗  ██║  ██║    ██║██║██║██║
+                ██╔══╝  ██║   ██║██║╚██╗██║██╔══╝  ██║╚██╔╝██║██╔═══╝ ██║     ██║   ██║  ╚██╔╝  ██╔══╝  ██║  ██║    ╚═╝╚═╝╚═╝╚═╝
+                ██║     ╚██████╔╝██║ ╚████║███████╗██║ ╚═╝ ██║██║     ███████╗╚██████╔╝   ██║   ███████╗██████╔╝    ██╗██╗██╗██╗
+                ╚═╝      ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝     ╚═╝╚═╝     ╚══════╝ ╚═════╝    ╚═╝   ╚══════╝╚═════╝     ╚═╝╚═╝╚═╝╚═╝
+          
+                                                                                A TERRIFIC AND GOOD PROGRAM BY:
+                                                                                        BELINDA & DAN
+
+          ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓
+         ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓
+        ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓
         
         LOGO
+
         puts "\nWelcome to Belinda and Dan's Job-Seeking App!"
         login 
     end
@@ -39,15 +52,30 @@ class CLI
         puts "2. Show me the list of jobs on my 'liked' list."
         puts "3. Delete a job from my 'liked' list."
         puts "4. Add a note to a job from my 'liked' list.\n"
-        puts "5. Exit.\n"
+        puts "5. Exit.\n\n"
         print "\nPlease enter your choice: "
         input = gets.chomp.to_i
 
         menu_router(input, job_seeker)
     end
+    
+    # def scary_main_menu(job_seeker)
+    #     puts "\nPlease choose from an option from the list below:"
+
+    #     puts "\n1. Show me a list of jobs that match my profile. (Sorted by salary)"
+    #     puts "2. Show me the list of jobs on my 'liked' list."
+    #     puts "3. Delete a job from my 'liked' list."
+    #     puts "4. Add a note to a job from my 'liked' list.\n"
+    #     puts "6.                                                               ṋ̣̺͓̗̜̮̰̓̎͛̾̅̽̌̅͆̎ị̢̨̱͙͔̹̹̦̞̉̅̔͛͛̈́̃͐̽̕ģ̧̹̝̖̠͍̮̘̔́͑̏́͛̕͘͜͝͝h̢̧͓̼̜̞͚̭͚͈̑͋̓̅̓̉̎͘̕͝t̢͇̹̼͙̟̺̟͎̔̐̈́̓̈́̈́̂͊̕ͅm̡͇͎̣̯͙̤̼͕̱̀̇̀͛̿̀̍͛̂͝a̡̢̻̞̺̠̩͈̖̤͌̊́̀̅̐̎̀̚̚r̨̢̞͓̮̩̣̲̻̤̈̃͆̀́͂͐͋͛͝e̦̗͇̘̭̦͎̝͇̮͌̒̀̌̈̓̉̎͘͠_̧̧̛̩̰̼̠̱̣̠͖̀̍̈̄̋́̂͘̚v̡̬̮̘̞̜̠̱̳̜́͑̀̈́́͊̓̎͝i̧̩̣̝̠̖͇̤̮̣͛͐̈́̈̅̋̃̇̄͘s̢̡̖͈̗̘̟̬̳̜̍͂͂̈̆̒́͗̎͝i̧̧̬͈͈͈͔͓̝̹̿̈́͊̈̀̍̈̈̕͠t̡̧̜͓̪̘̲͖̺̱̍̋͌̅̎̒̍̍̈́͝"
+    #     puts "5. Exit.\n\n"
+    #     print "\nPlease enter your choice: "
+    #     input = gets.chomp.to_i
+
+    #     menu_router(input, job_seeker)
+    # end
 
     def menu_router(input, job_seeker)
-        if input.class != Integer || input < 1 || input > 5
+        if input.class != Integer || input < 1 || input > 6
             puts "\nSorry. That's not a valid menu selection. Try again!"
         elsif input == 1
             puts "\n*****************\n"
@@ -97,7 +125,10 @@ class CLI
             puts "Your #{job_note_id} has been updated with the following note: \n #{note}"
         elsif input == 5 
             puts "\nThanks for logging in. Have a nice day!"
-            exit 0 
+            exit 0
+        elsif input == 6
+            puts `clear`
+            JobSeeker.nightmare_visit
         else
             puts "\nI don't support that option yet. Eek."
             
