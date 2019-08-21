@@ -44,7 +44,7 @@ class CLI
             job_seeker.like_job(job_id)
             puts "Would you like to add another? (Y/N)"
             answer = gets.chomp 
-            while answer == 'Y'
+            while answer == 'Y' || answer == 'y'
                 puts "*****************\nPlease choose a job you would like to add based on its six-digit job_id number (e.g., 378418).\n"
                 job_id = gets.chomp.to_i 
                 job_seeker.like_job(job_id) 
@@ -66,7 +66,7 @@ class CLI
         elsif input == 4 
             puts "\nYou have chosen to add a note to a job from your 'liked' list.\n"
             job_seeker.display_liked_jobs
-            puts "Please choose which job you would like to add a note to based on its number in the list. NOT JOB_ID."
+            puts "Please choose which job you would like to add a note to based on its JOB_ID number in the list. "
             job_note_id = gets.chomp.to_i 
             puts "You have selected #{job_note_id} to add a note to. \nPlease type in the note that you would like to add."
             note = gets.chomp.to_s 

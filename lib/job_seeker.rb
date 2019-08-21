@@ -59,24 +59,30 @@ class JobSeeker < ActiveRecord::Base
             salary_range_from: job_data["salary_range_from"],
             salary_range_to: job_data["salary_range_to"]
         )
-        LikedJob.find_or_create_by("open_job_id" => new_job.id, "job_seeker_id" => self.id)
+        LikedJob.find_or_create_by(open_job_id: new_job.id, job_seeker_id: self.id)
     end
 
     def remove_liked_job(liked_job_id)
-        LikedJob.where(id: liked_job_id).destroy_all
+        self.liked_jobs.select do |liked_job|
+            liked_job.id == liked_job_id
+        end[0].destroy
     end
 
     def display_liked_jobs
         table = Text::Table.new
-        table.head = ["Job #", "Title", "Notes", "Job ID"] #"Level", "Salary Range From", "Salary Range To"]
-        self.liked_jobs.each_with_index do |job, i|
-            open_job = OpenJob.where(id: job.open_job_id).first
-            table.rows << [i+1, open_job.title, job.notes, job.id]
+        table.head = ["Job ID", "Title", "Notes", "Salary Range From", "Salary Range To"] #"Level"
+        self.liked_jobs.reload.each_with_index do |liked_job, i|
+            open_job = OpenJob.where(id: liked_job.open_job_id).first
+            table.rows << [liked_job.id, open_job.title, liked_job.notes, "$" + open_job.salary_range_from.to_s, "$" + open_job.salary_range_to.to_s]
+            
         end
+        
         puts table
     end
     
     def add_notes(liked_job_id, notes)
-        self.liked_jobs.where(liked_job_id == id).update(notes: notes)
+        self.liked_jobs.select do |liked_job|
+            liked_job.id == liked_job_id
+        end[0].update(notes: notes)
     end
 end
