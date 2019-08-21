@@ -31,21 +31,12 @@ User Story #5: As a job seeker, I want to be able to add my own notes to jobs th
 -[X] Connect CLI info with additional User Stories 
 -[X] Sorting on salary
 -[X] Match base on level 
--[] Make CLI pretty!
-    -[] Reformat job list(s) as table (Dan)
-    -[] Clean up Input/Output in CLI (Belinda)
-    -[] Add ASCII ART!!! (Dan)
--[] Seed the Database (Belinda)
+-[] Add ASCII ART!!! (Dan)
+-[X] Seed the Database (Belinda)
 -[] Write the ReadMe
 -[] Create Demo Video
 -[X] Limit to reasonable # of jobs in API calls
--[] Figure out why liked_jobs is still only returning one job rather than the whole list 
--[] The remove method runs into the issue where after destroy the LikedJob data the Open Job data still persists 
+-[X] Figure out why liked_jobs is still only returning one job rather than the whole list 
+-[X] The remove method runs into the issue where after destroy the LikedJob data the Open Job data still persists 
 -[] add rescue errors 
-
-08-20-19 BL Update:
-- Added the exit method 
-- Cleaned up the CLI with rescue and new lines 
-- Fixed the display method 
-- Seeded with faker gem 
 

@@ -25,7 +25,7 @@ class JobSeeker < ActiveRecord::Base
         end
 
         new_job_seeker = JobSeeker.create(name: name, desired_salary: salary, level: level)
-
+        puts `clear`
         puts "Hello, #{new_job_seeker.name}. You've just created a new profile"
         new_job_seeker 
     end
@@ -38,14 +38,13 @@ class JobSeeker < ActiveRecord::Base
         end.uniq {|job| job["job_id"]}.take(15).sort_by {|job| job["salary_range_from"].to_i}.reverse
 
         table = Text::Table.new
-        table.head = ["Job #", "Job Title", "Salary From", "Salary To", "Location", "Job ID"]
+        table.head = ["Job ID", "Job Title", "Salary From", "Salary To", "Location"]
 
-        matches.each_with_index do |match, i|
-           table.rows << [i+1, match['business_title'],
+        matches.each do |match|
+           table.rows << [match['job_id'], match['business_title'],
             '$' + match['salary_range_from'],
             '$' + match['salary_range_to'],
-            match['work_location'],
-            match['job_id']]
+            match['work_location']]
         end
         puts table
     end
@@ -57,7 +56,8 @@ class JobSeeker < ActiveRecord::Base
             description: job_data["job_description"],
             level: job_data["level"],
             salary_range_from: job_data["salary_range_from"],
-            salary_range_to: job_data["salary_range_to"]
+            salary_range_to: job_data["salary_range_to"],
+            api_job_id: job_data["job_id"]
         )
         LikedJob.find_or_create_by(open_job_id: new_job.id, job_seeker_id: self.id)
     end

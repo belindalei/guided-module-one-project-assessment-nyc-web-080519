@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_20_133117) do
+ActiveRecord::Schema.define(version: 2019_08_21_174035) do
+
+  create_table "job_queues", force: :cascade do |t|
+    t.integer "open_job_id"
+    t.integer "job_seeker_id"
+  end
 
   create_table "job_seekers", force: :cascade do |t|
     t.string "name"
@@ -30,6 +35,7 @@ ActiveRecord::Schema.define(version: 2019_08_20_133117) do
     t.integer "level"
     t.integer "salary_range_from"
     t.integer "salary_range_to"
+    t.integer "api_job_id"
   end
 
 end

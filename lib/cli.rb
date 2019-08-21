@@ -13,6 +13,7 @@ class CLI
         my_name = gets.chomp
         if JobSeeker.find_by name: my_name
           job_seeker = JobSeeker.find_by name: my_name
+            puts `clear`
             puts "\nHello #{job_seeker.name}. Welcome back!"
         else
             job_seeker = JobSeeker.create_profile(my_name)
@@ -28,6 +29,7 @@ class CLI
         puts "3. Delete a job from my 'liked' list."
         puts "4. Add a note to a job from my 'liked' list.\n"
         puts "5. Exit.\n"
+        print "\nPlease enter your choice: "
         input = gets.chomp.to_i
 
         menu_router(input, job_seeker)
@@ -39,16 +41,25 @@ class CLI
         elsif input == 1
             puts "\n*****************\n"
             job_seeker.get_matches
-            puts "*****************\nPlease choose a job you would like to add based on its six-digit job_id number (e.g., 378418).\n"
-            job_id = gets.chomp.to_i 
+            puts "*****************\n"
+            puts "\nPlease choose a Job ID you would like to add, or press '0' to return to the main menu.\n\n"
+            print "Your choice: "
+            job_id = gets.chomp.to_i
+            if job_id == 0
+                puts `clear`
+                main_menu(job_seeker)
+            end
             job_seeker.like_job(job_id)
-            puts "Would you like to add another? (Y/N)"
+            var = job_seeker.open_jobs.where(api_job_id: job_id).first.title
+            puts "\n#{job_id} - #{var} added!"
+            print "\nWould you like to add another? (Y/N): "
             answer = gets.chomp 
             while answer == 'Y' || answer == 'y'
-                puts "*****************\nPlease choose a job you would like to add based on its six-digit job_id number (e.g., 378418).\n"
+                puts "*****************\n"
+                print "\nPlease choose a Job ID you would like to add, or press '0' to return to the main menu.\n"
                 job_id = gets.chomp.to_i 
                 job_seeker.like_job(job_id) 
-                puts "Would you like to add another? (Y/N)"
+                print "Would you like to add another? (Y/N): "
                 answer = gets.chomp
             end 
             job_seeker.display_liked_jobs
