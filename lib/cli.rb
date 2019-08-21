@@ -23,7 +23,7 @@ class CLI
     def main_menu(job_seeker)
         puts "\nPlease choose from an option from the list below:"
 
-        puts "\n1. Show me a list of jobs that match my profile. (Sorted by Salary)"
+        puts "\n1. Show me a list of jobs that match my profile. (Sorted by salary)"
         puts "2. Show me the list of jobs on my 'liked' list."
         puts "3. Delete a job from my 'liked' list."
         puts "4. Add a note to a job from my 'liked' list.\n"
