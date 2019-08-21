@@ -3,7 +3,7 @@ require 'pry'
 
 class CLI
     def run
-        ActiveRecord::Base.logger.level=1 
+        ActiveRecord::Base.logger.level=1
         puts "\nWelcome to Belinda and Dan's Job-Seeking App!"
         login 
     end
@@ -34,7 +34,7 @@ class CLI
     end
 
     def menu_router(input, job_seeker)
-        if input.class != Integer || input < 1 || input > 4
+        if input.class != Integer || input < 1 || input > 5
             puts "\nSorry. That's not a valid menu selection. Try again!"
         elsif input == 1
             job_seeker.get_matches
@@ -62,8 +62,8 @@ class CLI
             job_seeker.add_notes(job_note_id, note)
             job_seeker.display_liked_jobs 
             puts "Your #{job_note_id} has been updated with the following note: \n #{note}"
-        else
-            puts "\nI don't support that option yet. Eek."
+        elsif input == 5
+            exit
             
         end
         main_menu(job_seeker)

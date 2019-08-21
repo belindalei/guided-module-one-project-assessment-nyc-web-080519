@@ -1,3 +1,5 @@
+
+
 class JobSeeker < ActiveRecord::Base
     has_many :liked_jobs
     has_many :open_jobs, through: :liked_jobs
@@ -24,14 +26,17 @@ class JobSeeker < ActiveRecord::Base
             job["salary_range_from"].to_i >= self.desired_salary
         end.uniq {|job| job["job_id"]}.take(15).sort_by {|job| job["salary_range_from"].to_i}.reverse
 
+        table = Text::Table.new
+        table.head = ["Job #", "Job Title", "Salary From", "Salary To", "Location", "Job ID"]
 
         matches.each_with_index do |match, i|
-           puts "#{i+1}. #{match['business_title']} located in #{match['work_location']} with job_id #{match['job_id']}"
+           table.rows << [i+1, match['business_title'],
+            '$' + match['salary_range_from'],
+            '$' + match['salary_range_to'],
+            match['work_location'],
+            match['job_id']]
         end
-    end
-
-    def level_match
-
+        puts table
     end
 
     def like_job(job_id)
@@ -50,10 +55,14 @@ class JobSeeker < ActiveRecord::Base
         LikedJob.where(id: liked_job_id).destroy_all
     end
 
-    def display_liked_jobs  
-        self.liked_jobs.each do |job|
-            puts job.id 
+    def display_liked_jobs
+        table = Text::Table.new
+        table.head = ["Job #", "Title", "Notes", "Job ID"] #"Level", "Salary Range From", "Salary Range To"]
+        self.liked_jobs.each_with_index do |job, i|
+            open_job = OpenJob.where(id: job.open_job_id).first
+            table.rows << [i+1, open_job.title, job.notes, job.id]
         end
+        puts table
     end
     
     def add_notes(liked_job_id, notes)

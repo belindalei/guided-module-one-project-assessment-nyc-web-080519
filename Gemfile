@@ -12,4 +12,4 @@ gem 'thin'
 gem 'activerecord', '~>5.2.3'
 gem 'sinatra-activerecord'
 gem 'rake'
-
+gem 'text-table'
