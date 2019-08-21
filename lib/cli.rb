@@ -64,7 +64,6 @@ class CLI
             puts "Your #{job_note_id} has been updated with the following note: \n #{note}"
         elsif input == 5
             exit
-            
         end
         main_menu(job_seeker)
     end
