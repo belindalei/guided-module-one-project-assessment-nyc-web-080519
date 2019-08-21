@@ -41,6 +41,7 @@ User Story #5: As a job seeker, I want to be able to add my own notes to jobs th
 -[X] Limit to reasonable # of jobs in API calls
 -[] Figure out why liked_jobs is still only returning one job rather than the whole list 
 -[] The remove method runs into the issue where after destroy the LikedJob data the Open Job data still persists 
+-[] add rescue errors 
 
 08-20-19 BL Update:
 - Added the exit method 

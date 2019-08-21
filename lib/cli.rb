@@ -42,9 +42,18 @@ class CLI
             puts "*****************\nPlease choose a job you would like to add based on its six-digit job_id number (e.g., 378418).\n"
             job_id = gets.chomp.to_i 
             job_seeker.like_job(job_id)
+            puts "Would you like to add another? (Y/N)"
+            answer = gets.chomp 
+            while answer == 'Y'
+                puts "*****************\nPlease choose a job you would like to add based on its six-digit job_id number (e.g., 378418).\n"
+                job_id = gets.chomp.to_i 
+                job_seeker.like_job(job_id) 
+                puts "Would you like to add another? (Y/N)"
+                answer = gets.chomp
+            end 
             job_seeker.display_liked_jobs
             puts "The above are your liked jobs."
-        elsif input == 2 
+            elsif input == 2 
             puts "\n***********************\n"
             job_seeker.display_liked_jobs
         elsif input == 3
