@@ -50,12 +50,12 @@ class CLI
         if input.class != Integer || input < 1 || input > 5
             puts "\nSorry. That's not a valid menu selection. Try again!"
         elsif input == 1
-            puts "\n*****************\n"
+            stars
             job_seeker.get_matches
-            puts "*****************\n"
+            stars 
             puts "\nPlease choose a Job ID you would like to add, or press '0' to return to the main menu.\n\n"
             print "Your choice: "
-            job_id = gets.chomp.to_i
+            job_id = gets.chomp.to_i 
             if job_id == 0
                 puts `clear`
                 main_menu(job_seeker)
@@ -66,35 +66,45 @@ class CLI
             print "\nWould you like to add another? (Y/N): "
             answer = gets.chomp 
             while answer == 'Y' || answer == 'y'
-                puts "*****************\n"
+                stars
                 print "\nPlease choose a Job ID you would like to add, or press '0' to return to the main menu.\n"
                 job_id = gets.chomp.to_i 
                 job_seeker.like_job(job_id) 
-                print "Would you like to add another? (Y/N): "
+                puts "\n#{job_id} - #{var} added!"
+                print "\nWould you like to add another? (Y/N): "
                 answer = gets.chomp
             end 
             job_seeker.display_liked_jobs
             puts "The above are your liked jobs."
             elsif input == 2 
-            puts "\n***********************\n"
+            puts `clear`
+            stars
             job_seeker.display_liked_jobs
+            stars
         elsif input == 3
-            puts "You have chosen to delete items from your list"
+            puts `clear`
+            stars 
+            puts "You have chosen to delete items from your list.\n\n"
             job_seeker.display_liked_jobs
-            puts "Which item would you like to delete?"
+            puts "\nWhich item would you like to delete from the table above?\n"
+            print "\nJob_ID number to delete: "
             delete_item = gets.chomp.to_i 
+            stars 
             job_seeker.remove_liked_job(delete_item)
             puts "You have successfully removed #{delete_item}."
         elsif input == 4 
+            stars 
             puts "\nYou have chosen to add a note to a job from your 'liked' list.\n"
             job_seeker.display_liked_jobs
-            puts "Please choose which job you would like to add a note to based on its JOB_ID number in the list. "
+            puts "\nPlease choose which job you would like to add a note to based on its JOB_ID number in the list. "
             job_note_id = gets.chomp.to_i 
-            puts "You have selected #{job_note_id} to add a note to. \nPlease type in the note that you would like to add."
+            puts `clear`
+            puts "\nYou have selected #{job_note_id} to add a note to. \n\nPlease type in the note that you would like to add: \n\n"
             note = gets.chomp.to_s 
             job_seeker.add_notes(job_note_id, note)
             job_seeker.display_liked_jobs 
             puts "Your #{job_note_id} has been updated with the following note: \n #{note}"
+            stars
         elsif input == 5 
             puts "\nThanks for logging in. Have a nice day!"
             exit 0 
@@ -103,5 +113,9 @@ class CLI
             
         end
         main_menu(job_seeker)
+    end
+    
+    def stars
+        puts "\n************************************************************\n\n" 
     end
 end
