@@ -1,12 +1,6 @@
 Funemployed: A Job-Seeking CLI App
 ==================================
 
-Congratulations, you're at the end of module one! You've worked crazy hard to get here and have learned a ton.
-
-For your final project, you'll be building a Command Line Application.
-
----
-
 ## Goals (Minimum Requirements)
 
 You will be building a **Command Line CRUD App** that uses a database to persist information. The goal of which is to demonstrate all of the skills that you've learned in module one:

@@ -1,32 +1,17 @@
-
-
 class JobSeeker < ActiveRecord::Base
     has_many :liked_jobs
     has_many :open_jobs, through: :liked_jobs
 
-  @@base_url = "https://data.cityofnewyork.us/resource/kpav-sd4t.json?"
+    @@base_url = "https://data.cityofnewyork.us/resource/kpav-sd4t.json?"
 
     def self.create_profile(name)
-        puts "What is your minimum annual salary requirement?"
-        begin
-            salary = gets.chomp
-            salary = Integer(salary)
-        rescue ArgumentError 
-            puts "Please enter an integer number:"
-            retry 
-        end 
+        puts "What is your minimum annual salary requirement? (Between $0-$300000)"
+        salary = Sanitize.get_num(0, 300000, "\nInvalid entry. Your salary needs to be an integer between 0-300000.")
         puts "What is your government job/GS level? GS levels consist of 15 grades with 1 being the lowest and 15 being the highest."
-        level = gets.chomp.to_i
-        if !level.between?(1,15) 
-            puts "Please input a GS level between 1-15 with 1 being the entry level position and 15 being the most senior position."
-            level = gets.chomp.to_i
-        else 
-            level
-        end
-
-        new_job_seeker = JobSeeker.create(name: name, desired_salary: salary, level: level)
+        level = get_num(1, 15, "Please input a GS level between 1-15 with 1 being the entry level position and 15 being the most senior position.")
+        new_job_seeker = JobSeeker.create(name: name.capitalize, desired_salary: salary, level: level)
         puts `clear`
-        puts "Hello, #{new_job_seeker.name}. You've just created a new profile"
+        puts "Hello, #{new_job_seeker.name}. You've just created a new profile."
         new_job_seeker 
     end
 
@@ -46,17 +31,14 @@ class JobSeeker < ActiveRecord::Base
             '$' + match['salary_range_to'],
             match['work_location']]
         end
-        puts table
+        table.to_s
     end
 
     def like_job(job_id)
-        # liked_job_id_arr = self.liked_jobs.map do |liked_job|
-        #     liked_job.id 
-        # end 
-        # if !liked_job_id_arr.include?(job_id)
-        #     puts "Invalid response. please input another response."
-        # end 
         job_data = JSON.parse(RestClient.get("#{@@base_url}job_id=#{job_id}"))[0]
+        if job_data == nil
+            return "Job ID does not exist in the database. Please try again."
+        end
         new_job = OpenJob.create(
             title: job_data["business_title"],
             description: job_data["job_description"],
@@ -66,6 +48,7 @@ class JobSeeker < ActiveRecord::Base
             api_job_id: job_data["job_id"]
         )
         LikedJob.find_or_create_by(open_job_id: new_job.id, job_seeker_id: self.id)
+        return "\n#{job_id} - #{new_job.title} added!"
     end
 
     def remove_liked_job(liked_job_id)
@@ -75,16 +58,13 @@ class JobSeeker < ActiveRecord::Base
     end
 
     def display_liked_jobs
-        puts "\nYou have #{self.liked_jobs.count} liked jobs in your list: \n\n"
         table = Text::Table.new
         table.head = ["Job ID", "Title", "Notes", "Salary Range From", "Salary Range To"] #"Level"
         self.liked_jobs.reload.each_with_index do |liked_job, i|
             open_job = OpenJob.where(id: liked_job.open_job_id).first
             table.rows << [liked_job.id, open_job.title, liked_job.notes, "$" + open_job.salary_range_from.to_s, "$" + open_job.salary_range_to.to_s]
-            
         end
-        
-        puts table
+        return "\nYou have #{self.liked_jobs.count} liked jobs in your list: \n\n" + table.to_s + "\nThe above are your liked jobs.\n\n"
     end
     
     def add_notes(liked_job_id, notes)
