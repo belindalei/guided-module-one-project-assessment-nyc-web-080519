@@ -1,6 +1,6 @@
 module Sanitize
     #get the user input and sanitize and return
-    def get_num(min, max, msg = "Invalid input. Try again.")
+    def get_num(min, max, msg = "\nInvalid input. Try again.")
         while true
             user_input = gets.strip
             if user_input == "" || !user_input.match?(/\A-?\d+\Z/) || user_input.to_i < min || user_input.to_i > max || user_input == nil

@@ -53,11 +53,11 @@ def menu_router(input, job_seeker)
             job_id = get_num(0, 10000000000)
             return_main_menu(job_id, job_seeker)
             puts job_seeker.like_job(job_id)
-            puts job_seeker.display_liked_jobs
         end 
     elsif input == 2 
         clear
         print_with_stars(job_seeker.display_liked_jobs)
+        sleep 2.0 
     elsif input == 3
         clear
         puts "You have chosen to delete items from your list.\n\n" +
@@ -67,7 +67,7 @@ def menu_router(input, job_seeker)
         return_main_menu(delete_item, job_seeker)
         job_seeker.remove_liked_job(delete_item)
         puts "You have successfully removed #{delete_item}."
-    elsif input == 4 #EDGE CASE for ID num in database needs to be built out 
+    elsif input == 4
         puts "\nYou have chosen to add a note to a job from your 'liked' list.\n" +
         job_seeker.display_liked_jobs
         job_note_id = exists_in_database(job_seeker, "\nPlease choose a job you would like to add a note to based on its valid JOB_ID number in the list, or 0 to return to the main menu. " )
