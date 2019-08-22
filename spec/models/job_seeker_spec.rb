@@ -11,11 +11,9 @@ describe "JobSeeker" do
     expect(job_seeker.level).to eq(10)
   end
 
-
-
   describe '#parse_job_data' do
     it 'returns data as an hash' do
-      result = job_seeker.parse_job_data(87990)
+      result = job_seeker.parse_job_id_data(87990)
       expect(result).to be_a Hash
     end
 

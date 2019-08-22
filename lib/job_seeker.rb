@@ -6,7 +6,7 @@ class JobSeeker < ActiveRecord::Base
 
     def self.create_profile(name)
         puts "What is your minimum annual salary requirement? (Between $0-$300000)"
-        salary = sanitize(0, 300000, "\nInvalid entry. Your salary needs to be an integer between 0-300000.".red)
+        salary = sanitize(0, 300000, "\n\nInvalid entry. Your salary needs to be an integer between 0-300000.".red)
         puts "What is your government job/GS level? GS levels consist of 15 grades with 1 being the lowest and 15 being the highest."
         level = sanitize(1, 15, "Please input a GS level between 1-15 with 1 being the entry level position and 15 being the most senior position.".red)
         new_job_seeker = JobSeeker.create(name: name.capitalize, desired_salary: salary, level: level)
@@ -15,8 +15,12 @@ class JobSeeker < ActiveRecord::Base
         new_job_seeker 
     end
 
+    def parse_job_data
+        JSON.parse(RestClient.get(@@base_url))
+    end
+
     def get_matches
-        job_data = JSON.parse(RestClient.get(@@base_url))
+        job_data = parse_job_data
         matches = job_data.select do |job|
             job["salary_range_from"].to_i >= self.desired_salary
         end.uniq {|job| job["job_id"]}.take(15).sort_by {|job| job["salary_range_from"].to_i}.reverse
@@ -33,14 +37,14 @@ class JobSeeker < ActiveRecord::Base
         table.to_s.blue
     end
 
-    def parse_job_data(job_id)
+    def parse_job_id_data(job_id)
         JSON.parse(RestClient.get("#{@@base_url}job_id=#{job_id}"))[0] 
     end
 
     def like_job(job_id)
-        job_data = parse_job_data(job_id)
+        job_data = parse_job_id_data(job_id)
         if job_data == nil
-            return "Job ID does not exist in the database. Please try again."
+            return "Job ID does not exist in the database. Please try again.".red
         end
         new_job = OpenJob.create(
             title: job_data["business_title"],

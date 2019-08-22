@@ -1,5 +1,5 @@
 
-def sanitize(min, max, msg = "\nInvalid input. Try again.".red)
+def sanitize(min, max, msg = "\n\nInvalid input. Try again.".red)
     while true
         user_input = gets.strip
         if user_input == "" || !user_input.match?(/\A-?\d+\Z/) || user_input.to_i < min || user_input.to_i > max || user_input == nil
