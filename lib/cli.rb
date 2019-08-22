@@ -54,7 +54,7 @@ end
 
 def menu_router(input, job_seeker)
     if input.class != Integer || input < 1 || input > 6
-        puts "\nSorry. That's not a valid menu selection. Try again!".colorize(:red)
+        puts "\nSorry. That's not a valid menu selection. Try again!".red
     elsif input == 1
         print_with_stars(job_seeker.get_matches)
         while true 

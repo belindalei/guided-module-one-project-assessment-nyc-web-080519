@@ -17,7 +17,6 @@ class JobSeeker < ActiveRecord::Base
 
     def get_matches
         job_data = JSON.parse(RestClient.get(@@base_url))
-        
         matches = job_data.select do |job|
             job["salary_range_from"].to_i >= self.desired_salary
         end.uniq {|job| job["job_id"]}.take(15).sort_by {|job| job["salary_range_from"].to_i}.reverse
@@ -34,8 +33,12 @@ class JobSeeker < ActiveRecord::Base
         table.to_s.blue
     end
 
+    def parse_job_data(job_id)
+        JSON.parse(RestClient.get("#{@@base_url}job_id=#{job_id}"))[0] 
+    end
+
     def like_job(job_id)
-        job_data = JSON.parse(RestClient.get("#{@@base_url}job_id=#{job_id}"))[0]
+        job_data = parse_job_data(job_id)
         if job_data == nil
             return "Job ID does not exist in the database. Please try again."
         end

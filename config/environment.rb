@@ -1,8 +1,10 @@
 require 'bundler'
-require 'rest-client'
-require 'json'
-require 'text-table'
-require 'colorize'
+# require 'rest-client'
+# require 'json'
+# require 'text-table'
+# require 'colorize'
+# require 'rspec'
+
 
 
 Bundler.require
