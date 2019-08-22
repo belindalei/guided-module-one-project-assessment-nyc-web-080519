@@ -4,11 +4,9 @@ class JobSeeker < ActiveRecord::Base
 
     @@base_url = "https://data.cityofnewyork.us/resource/kpav-sd4t.json?"
 
-    extend Sanitize
-
     def self.create_profile(name)
         puts "What is your minimum annual salary requirement? (Between $0-$300000)"
-        salary = get_num(0, 300000, "Invalid entry. Your salary needs to be an integer between $0-$300000.")
+        salary = Sanitize.get_num(0, 300000, "Invalid entry. Your salary needs to be an integer between $0-$300000.")
         puts "What is your government job/GS level? GS levels consist of 15 grades with 1 being the lowest and 15 being the highest."
         level = get_num(1, 15, "Please input a GS level between 1-15 with 1 being the entry level position and 15 being the most senior position.")
         new_job_seeker = JobSeeker.create(name: name.capitalize, desired_salary: salary, level: level)
@@ -66,7 +64,7 @@ class JobSeeker < ActiveRecord::Base
             open_job = OpenJob.where(id: liked_job.open_job_id).first
             table.rows << [liked_job.id, open_job.title, liked_job.notes, "$" + open_job.salary_range_from.to_s, "$" + open_job.salary_range_to.to_s]
         end
-        return "\nYou have #{self.liked_jobs.count} liked jobs in your list: \n\n" + table.to_s + "\nThe above are your liked jobs."
+        return "\nYou have #{self.liked_jobs.count} liked jobs in your list: \n\n" + table.to_s + "\nThe above are your liked jobs.\n\n"
     end
     
     def add_notes(liked_job_id, notes)
