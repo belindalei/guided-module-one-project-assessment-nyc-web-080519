@@ -1,6 +1,7 @@
 def weird_jobs
   table = Text::Table.new
   table.head = ["Death Count", "ÇØ‰‰¨∏ˇ´Î_JØb_ˇˇÒ´", "The Sacrement", "Insidious", "A Place Lost to Time"]
+  
 
 
   array = [
