@@ -1,10 +1,6 @@
 require_all 'lib'
 require 'pry'
 
-include Sanitize
-include MainMenu 
-include DatabaseExistence
-
 def run
     ActiveRecord::Base.logger.level=1
     puts <<-LOGO
@@ -56,21 +52,21 @@ def main_menu(job_seeker)
 end
 
 def menu_router(input, job_seeker)
-    if input.class != Integer || input < 1 || input > 5
-        puts "\nSorry. That's not a valid menu selection. Try again!"
+    if input.class != Integer || input < 1 || input > 6
+        puts "\nSorry. That's not a valid menu selection. Try again!".colorize(:red)
     elsif input == 1
         print_with_stars(job_seeker.get_matches)
         while true 
             puts "\nPlease choose a Job ID you would like to add to your liked list, or press '0' to return to the main menu.\n\n"
             print "Your choice: "
-            job_id = get_num(0, 10000000000)
+            job_id = sanitize(0, 10000000000)
             return_main_menu(job_id, job_seeker)
             puts job_seeker.like_job(job_id)
         end 
     elsif input == 2 
         clear
         print_with_stars(job_seeker.display_liked_jobs)
-        sleep 2.0 
+        sleep 1.0 
     elsif input == 3
         clear
         puts "You have chosen to delete items from your list.\n\n" +
@@ -95,9 +91,12 @@ def menu_router(input, job_seeker)
     elsif input == 5 
         puts "\nThanks for logging in. Have a nice day!"
         exit 0 
+    elsif input == 6 
+        clear 
+        sleep 4.0
+        weird_jobs 
     else
         puts "\nI don't support that option yet. Eek."
-        
     end
     main_menu(job_seeker)
 end

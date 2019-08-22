@@ -2,6 +2,7 @@ require 'bundler'
 require 'rest-client'
 require 'json'
 require 'text-table'
+require 'colorize'
 
 
 Bundler.require
