@@ -1,14 +1,14 @@
-
-
 class JobSeeker < ActiveRecord::Base
     has_many :liked_jobs
     has_many :open_jobs, through: :liked_jobs
 
     @@base_url = "https://data.cityofnewyork.us/resource/kpav-sd4t.json?"
 
+    extend Sanitize
+
     def self.create_profile(name)
         puts "What is your minimum annual salary requirement? (Between $0-$300000)"
-        salary = get_num(0, 300000, "Invalid entry. Your salary needs to be between $0-$300000.")
+        salary = get_num(0, 300000, "Invalid entry. Your salary needs to be an integer between $0-$300000.")
         puts "What is your government job/GS level? GS levels consist of 15 grades with 1 being the lowest and 15 being the highest."
         level = get_num(1, 15, "Please input a GS level between 1-15 with 1 being the entry level position and 15 being the most senior position.")
         new_job_seeker = JobSeeker.create(name: name.capitalize, desired_salary: salary, level: level)
@@ -38,7 +38,7 @@ class JobSeeker < ActiveRecord::Base
 
     def like_job(job_id)
         job_data = JSON.parse(RestClient.get("#{@@base_url}job_id=#{job_id}"))[0]
-        if job_data == nil 
+        if job_data == nil
             return "Job ID does not exist in the database. Please try again."
         end
         new_job = OpenJob.create(
@@ -77,14 +77,4 @@ class JobSeeker < ActiveRecord::Base
     
 end
 
-#get the user input and sanitize and return 
-def get_num(min, max, msg = "Invalid input. Try again.")
-    while true
-        user_input = gets.chomp 
-        if user_input == "" || !Integer(user_input) || user_input.to_i < min || user_input.to_i > max 
-            puts msg 
-            next 
-        end 
-        return user_input 
-    end
-end
+ 

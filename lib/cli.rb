@@ -2,6 +2,9 @@ require_all 'lib'
 require 'pry'
 
 class CLI
+
+    include Sanitize 
+
     def run
         ActiveRecord::Base.logger.level=1
         puts <<-LOGO
@@ -47,9 +50,10 @@ class CLI
             while true 
                 puts "\nPlease choose a Job ID you would like to add, or press '0' to return to the main menu.\n\n"
                 print "Your choice: "
-                job_id = gets.chomp.to_i 
+                job_id = get_num(0, 10000000000)
                 if job_id == 0
                     clear 
+                    puts "Welcome back to the main menu."
                     main_menu(job_seeker)
                 end
                 puts job_seeker.like_job(job_id)
