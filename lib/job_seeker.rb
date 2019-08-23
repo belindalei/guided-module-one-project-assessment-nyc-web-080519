@@ -10,7 +10,7 @@ class JobSeeker < ActiveRecord::Base
         puts "What is your government job/GS level? GS levels consist of 15 grades with 1 being the lowest and 15 being the highest."
         level = sanitize(1, 15, "Please input a GS level between 1-15 with 1 being the entry level position and 15 being the most senior position.".red)
         new_job_seeker = JobSeeker.create(name: name.capitalize, desired_salary: salary, level: level)
-        puts `clear`
+        clear 
         puts "Hello, #{new_job_seeker.name}. You've just created a new profile."
         new_job_seeker 
     end

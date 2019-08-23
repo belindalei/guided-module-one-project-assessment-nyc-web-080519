@@ -33,8 +33,8 @@ def run
 
 def login
     puts "\nWhat is your name?\n"
-    my_name = gets.chomp
-    if JobSeeker.find_by name: my_name
+    my_name = gets.chomp.capitalize 
+    if JobSeeker.find_by name: my_name 
         job_seeker = JobSeeker.find_by name: my_name
         clear
         puts "\nHello #{job_seeker.name}. Welcome back!"
