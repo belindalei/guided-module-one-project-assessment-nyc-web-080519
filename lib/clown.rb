@@ -145,5 +145,6 @@ def nightmare_visit
                             ``..``.....                                         `:;#zzzzzzxxnznnnnnzn#;:;+xMWWWWMMMMnz+zMM*;:...,;
                               `````....`                                        ,ii+zzzznnxxxxxxxxxxxzi::;*#xWWWWMMMMxxnnM#*;,...;;
       CLOWN
+      pid = fork{ exec 'killall', "afplay"} 
       exit
   end

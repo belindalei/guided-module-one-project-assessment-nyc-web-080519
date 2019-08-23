@@ -27,7 +27,6 @@ def run
         
         LOGO
 
-        pid = fork{ exec 'afplay', '01_JayZ.mp3'} 
         puts "\nWelcome to Belinda and Dan's Job-Seeking App!"
         login 
     end
@@ -91,11 +90,11 @@ def menu_router(input, job_seeker)
         
     elsif input == 5 
         puts "\nThanks for logging in. Have a nice day!"
-        pid = fork{ exec 'killall', "afplay"} 
         exit 0 
     elsif input == 6 
         clear 
         sleep 4.0
+        pid = fork{ exec 'afplay', 'Scary Clown Music.mp3'} 
         weird_jobs 
     else
         puts "\nI don't support that option yet. Eek."
