@@ -68,10 +68,12 @@ def print_fast(string)
     print string + " "
     sleep(0.05)
   end
-  300.times do 
+  500.times do 
     print string + " "
     sleep(0.01)
   end
+  clear
+  sleep(1)
 end
 
 def nightmare_visit
