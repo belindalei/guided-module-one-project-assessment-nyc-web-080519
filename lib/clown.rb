@@ -17,7 +17,7 @@ def weird_jobs
     table.rows << job
   end
   puts table.to_s.red
-  sleep 5.0 
+  sleep 3.0 
   clown_main_menu 
 end
 
@@ -47,17 +47,51 @@ def print_clown_options
     print "\nPlease enter your choice: ".red
 end 
 
+def printer(string)
+  my_arr = string.split("")
+  my_arr.each do |char|
+    print char
+    sleep(0.2)
+  end
+end
+
+def print_fast(string)
+  10.times do
+    print string + " "
+    sleep(0.3)
+  end
+  10.times do
+    print string + " "
+    sleep(0.2)
+  end
+  100.times do 
+    print string + " "
+    sleep(0.05)
+  end
+  300.times do 
+    print string + " "
+    sleep(0.01)
+  end
+end
+
 def nightmare_visit
-      puts "Goodnight! Sleep Tight!".red
-      sleep(3)
-      clear
-      puts "Goodnight!!! Sleep Tight!!!".red
-      sleep(3)
-      clear
-      puts "HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAH".red
-      sleep(3)
-      puts "SLEEP SLEEP SLEEP SLEEP SLEEP SLEEP SLEEP SLEEP".red
-      sleep(3)
+  string1 = "Thank you for choosing 'Nightmare Visit'".red
+  string2 = "Goodnight! Sleep Tight!".red
+  string3 = "HA... HA... HA...".red
+  
+  clear
+  printer(string1)
+  sleep(1)
+  clear
+  printer(string2)
+  sleep(1)
+  clear
+  printer(string3)
+  clear
+  print_fast"SLEEP! SLEEP!".red
+  sleep(1)
+  clear
+
 
       puts <<-CLOWN
       `+xxMMMMMMMMMxMMMMMxxxxWWxxxxxMMMWMMWWWWnzxWMMMxMMMMMMMMMxxxxxxxxxxxnnnnnnnnnnnxxxxxxnnMWMWMMMMWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
